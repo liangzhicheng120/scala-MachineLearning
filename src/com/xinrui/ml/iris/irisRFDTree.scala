@@ -28,6 +28,6 @@ object irisRFDTree {
       numTrees, featureSubsetStrategy, impurity, maxDepth, maxBins) //建立模型
     model.trees.foreach(println) //打印每棵树的相信信息
     val test = Vectors.dense(Array(5.1, 3.5, 1.4, 0.2))
-    println(model.predict(test))
+    println("随机雨林的分类：" + model.predict(test))
   }
 }
