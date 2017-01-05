@@ -23,7 +23,6 @@ object irisRFDTree {
     val impurity = "entropy" //设定信息增益计算方式
     val maxDepth = 5 //设定树高度	
     val maxBins = 3 //设定分裂数据集
-
     val model = RandomForest.trainClassifier(data, numClasses, categoricalFeaturesInfo,
       numTrees, featureSubsetStrategy, impurity, maxDepth, maxBins) //建立模型
     model.trees.foreach(println) //打印每棵树的相信信息
