@@ -6,33 +6,40 @@ import org.apache.log4j.Logger
 import org.apache.log4j.Level
 import scala.tools.nsc.doc.model.Val
 import java.util.Collection
-
+import java.sql.DriverManager
+import java.sql.Connection
 /**
- * 测试切词
+ * 测试连接数据库
  */
 object TestAnything {
-  val keyWord = "三少爷的剑"
   def main(arr: Array[String]) {
     val conf = new SparkConf().setMaster("local").setAppName("TestAnything")
     val sc = new SparkContext(conf)
     Logger.getLogger("org").setLevel(Level.ERROR)
-    val source = sc.textFile("D:\\workspace\\scala-workspace\\scala-MachineLearning\\src\\com\\xinrui\\ml\\test\\冒险.txt").cache()
-    //    for (word ← source) {
-    //      val data = word.stripLineEnd.split(",")
-    //      val content = data(0)
-    //      if (content.equals("三少爷的剑1")) println(word) else println("NO")
-    //    }
-    val result = source.map(flag)
-    for (w ← result) {
-      println(w.mkString)
+
+    val driver = "com.mysql.jdbc.Driver"
+    val url = "jdbc:mysql://localhost/mydemo"
+    val username = "root"
+    val password = "8532936"
+
+    var connection: Connection = null
+
+    try {
+      Class.forName(driver)
+      connection = DriverManager.getConnection(url, username, password)
+      val statement = connection.createStatement()
+      val resultSet = statement.executeQuery("SELECT * FROM clustertab")
+      while (resultSet.next()) {
+        val filmId = resultSet.getString("filmId")
+        val filmName = resultSet.getString("filmName")
+        val direct = resultSet.getString("direct")
+        println("filmId, filmName,direct = " + filmId + ", " + filmName + ", " + direct)
+      }
+    } catch {
+      case e            => e.printStackTrace
+      case _: Throwable => println("ERROR")
     }
+    connection.close()
   }
 
-  def flag(sentence: String): List[String] = {
-    //    val data = sentence.stripLineEnd.split(",")
-    //    val result = if (data(0).equals(keyWord)) sentence else "NO"
-    //    return result
-    val result = ".*三少爷的剑.*".r findAllIn sentence
-    return result.toList
-  }
 }
