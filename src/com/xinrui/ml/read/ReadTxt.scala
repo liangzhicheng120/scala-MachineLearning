@@ -1,4 +1,4 @@
-package com.xinrui.ml.test
+package com.xinrui.ml.read
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
@@ -6,12 +6,10 @@ import org.apache.log4j.Logger
 import org.apache.log4j.Level
 import scala.tools.nsc.doc.model.Val
 import java.util.Collection
-
 /**
- * 测试切词
+ * 测试读取文本并切分文本
  */
-object TestAnything {
-  val keyWord = "三少爷的剑"
+object ReadTxt {
   def main(arr: Array[String]) {
     val conf = new SparkConf().setMaster("local").setAppName("TestAnything")
     val sc = new SparkContext(conf)
