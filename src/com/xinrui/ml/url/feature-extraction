@@ -1,2 +1,5 @@
 # 利用信息熵提取文章关键词  http://blog.csdn.net/zhaoxinfan/article/details/12751405
 # TextRank算法提取关键词的Java实现(自动摘要算法:TextRank算法,tf-idf算法)	http://www.cnblogs.com/duodushu/p/5446341.html
+# HanLP 1.1.2 文档	http://hanlp.linrunsoft.com/doc/_build/html/segment.html
+# 基于hanLP的中文分词详解-MapReduce实现&自定义词典文件	http://blog.csdn.net/a_step_further/article/details/50333961
+# 自然语言处理之分词器ansj和hanlp介绍	http://zhao-rock.iteye.com/blog/2297428
